@@ -1,0 +1,7 @@
+flash.c:4:16:GetSector	17
+flash.c:43:6:flash_erase	4
+flash.c:70:16:flash_unlock	3
+flash.c:87:6:flash_write_word	3
+flash.c:109:6:flash_write_byte	3
+flash.c:131:6:flash_read_word	2
+flash.c:138:6:flash_read_byte	2

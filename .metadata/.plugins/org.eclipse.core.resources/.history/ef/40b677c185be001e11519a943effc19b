@@ -1,0 +1,53 @@
+/*
+ * boot.h
+ *
+ *  Created on: Jan 26, 2024
+ *      Author: ADMIN
+ */
+
+#ifndef INC_BOOT_H_
+#define INC_BOOT_H_
+#include "main.h"
+#include "flash.h"
+#define BOOT_READ_CMD 0x69
+#define BOOT_WRITE_CMD 0x96
+#define BOOT_ERASE_CMD 0x77
+typedef enum
+{
+    BOOT_READ = 0,
+    BOOT_WRITE,
+    BOOT_ERASE,
+    BOOT_NO_VILID
+} ACK_fram_t;
+uint32_t convert(uint8_t buffer);
+void boot_read_func(uint32_t *ptr_data, uint32_t length);
+void boot_write_func(uint32_t *ptr_data, uint32_t length);
+void boot_erase_func(uint32_t *ptr_data, uint32_t length);
+void boot_ack_handler(UART_HandleTypeDef *uart, ACK_fram_t ack_type);
+void boot_nack_handler(UART_HandleTypeDef *uart, ACK_fram_t ack_type);
+typedef struct
+{
+    uint32_t cmd;
+    uint32_t flash_addr;
+    uint32_t length_flash;
+    uint32_t crc;
+
+} read_cmd_t;
+typedef struct
+{
+    uint32_t cmd;
+    uint32_t flash_addr;
+    uint32_t *scr_addr;
+    uint32_t length_flash;
+    uint32_t crc;
+
+} write_cmd_t;
+typedef struct
+{
+    uint32_t cmd;
+    uint32_t flash_addr;
+    uint32_t crc;
+
+} erase_cmd_t;
+
+#endif /* INC_BOOT_H_ */

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;F411_BOOT_USER/Core/Src/boot_copy.c&apos; to &apos;boot.c&apos;" description="Rename resource &apos;boot_copy.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/boot_copy.c" name="boot.c" stamp="1706519276273" updateReferences="true"/>
+</session>

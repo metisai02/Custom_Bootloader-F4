@@ -1,0 +1,78 @@
+/*
+ * boot.c
+ *
+ *  Created on: Jan 26, 2024
+ *      Author: ADMIN
+ */
+#include "boot.h"
+#include "FLASH_SECTOR_F4.h"
+#include <stdlib.h>
+#include <string.h>
+
+extern UART_HandleTypeDef huart6;
+#define UART_BOOT huart6
+
+void boot_main()
+{
+    uint32_t data_f_host = 0;
+    uint32_t length = 0;
+    while (1)
+    {
+        HAL_UART_Receive(&UART_BOOT, (uint8_t *)data_f_host, sizeof(data_f_host), HAL_MAX_DELAY);
+        length = data_f_host;
+        uint32_t *ptr_data = malloc(length * sizeof(uint32_t));
+        HAL_UART_Receive(&UART_BOOT, (uint8_t *)(ptr_data), length, 1000);
+        switch (*ptr_data)
+        {
+        case BOOT_READ_CMD:
+            boot_read_func(ptr_data, length);
+            break;
+        case BOOT_WRITE_CMD:
+            boot_write_func(ptr_data, length);
+            break;
+        case BOOT_ERASE_CMD:
+            boot_erase_func(ptr_data, length);
+            break;
+        default:
+            boot_nack_handler(&UART_BOOT, BOOT_NO_VILID);
+            break;
+        }
+        data_f_host = 0;
+        free(ptr_data);
+    }
+}
+
+void boot_read_func(uint32_t *ptr_data, uint32_t length)
+{
+    read_cmd_t *read_fram = (read_cmd_t *)ptr_data;
+    uint32_t *data = malloc(sizeof(read_fram->length_flash) * sizeof(uint32_t));
+    uint32_t length_temp = read_fram->length_flash;
+    while (length_temp--)
+    {
+        *data = *(uint32_t *)read_fram->flash_addr;
+        read_fram->flash_addr += 4;
+        data++;
+    }
+    HAL_UART_Transmit(&UART_BOOT, (uint8_t *)data, read_fram->length_flash * sizeof(uint32_t), HAL_MAX_DELAY);
+    free(data);
+}
+void boot_write_func(uint32_t *ptr_data, uint32_t length)
+{
+    write_cmd_t *write_fram = (write_cmd_t *)ptr_data;
+    uint32_t length_temp = write_fram->length_flash;
+    if (Flash_Write_Data(write_fram->flash_addr, write_fram->scr_addr, length_temp) != HAL_OK)
+    {
+        char *s = "Could not write into the flashs";
+        HAL_UART_Transmit(&UART_BOOT, (uint8_t *)s, strlen(s), HAL_MAX_DELAY);
+        boot_nack_handler(&UART_BOOT, BOOT_WRITE);
+    }
+    else
+    {
+        boot_ack_handler(&UART_BOOT, BOOT_WRITE);
+    }
+}
+void boot_erase_func(uint32_t *ptr_data, uint32_t length)
+{
+}
+void boot_ack_handler(UART_HandleTypeDef *uart, ACK_fram_t ack_type) {}
+void boot_nack_handler(UART_HandleTypeDef *uart, ACK_fram_t ack_type) {}

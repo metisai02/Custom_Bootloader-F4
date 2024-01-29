@@ -1,0 +1,36 @@
+!SESSION 2024-01-29 16:00:58.782 -----------------------------------------------
+eclipse.buildId=Version 1.12.1
+java.version=11.0.17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\ADMIN\Desktop\Custom_bootloader
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-01-29 16:01:05.242
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-01-29 16:01:05.257
+!MESSAGE Log4j2 initialized with config file C:\Users\ADMIN\Desktop\Custom_bootloader\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-01-29 16:01:20.211
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-01-29 16:02:28.456
+!MESSAGE Indexed 'F411_APP_USER' (19 sources, 81 headers) in 2.96 sec: 4,259 declarations; 17,964 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.009%)
+!SESSION 2024-01-29 16:05:55.467 -----------------------------------------------
+eclipse.buildId=Version 1.12.1
+java.version=11.0.17
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-01-29 16:06:17.150
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-01-29 16:06:17.151
+!MESSAGE Log4j2 initialized with config file C:\Users\ADMIN\Desktop\Custom_bootloader\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-01-29 16:06:31.063
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-01-29 16:06:36.911
+!MESSAGE Indexed 'F411_BOOT_USER' (28 sources, 117 headers) in 4.79 sec: 9,826 declarations; 40,472 references; 3 unresolved inclusions; 42 syntax errors; 147 unresolved names (0.29%)

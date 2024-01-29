@@ -1,0 +1,6 @@
+boot.c:16:6:boot_main	9
+boot.c:53:6:boot_send_ack	1
+boot.c:57:6:boot_send_nack	1
+boot.c:61:19:boot_read_handler	4
+boot.c:86:19:boot_write_handler	3
+boot.c:103:19:boot_erase_handler	3
