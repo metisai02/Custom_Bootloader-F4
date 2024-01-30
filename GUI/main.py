@@ -11,7 +11,7 @@ class Mainwindow(QMainWindow):
         self.ui = Ui_mainUI()
         self.ui.setupUi(self)
         self.uart = Uart_serial(self.ui)
-        self.flash = Flash(self.ui)
+        self.flash = Flash(self.ui,self.uart)
         
 
 if __name__ == "__main__":

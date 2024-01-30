@@ -2,7 +2,7 @@ from PyQt6.QtCore import QTimer
 import serial, serial.tools.list_ports
 class Uart_serial:
     def __init__(self, ui):
-        self.ui = ui  # Lưu tham chiếu đến giao diện
+        self.ui = ui
         self.baudList = {
             "4800": 4800,
             "9600": 9600,
@@ -12,7 +12,7 @@ class Uart_serial:
         }
         self.portList = []
         self.serialPort = serial.Serial()
-        self.ui.btnConnect.setText("Connect")  # Sử dụng ui để truy cập thành phần giao diện
+        self.ui.btnConnect.setText("Connect")  
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_serial)
@@ -45,3 +45,18 @@ class Uart_serial:
             self.portList.append(port.device)
         self.ui.cbCOM.clear()
         self.ui.cbCOM.addItems(self.portList)
+    def send_data_serial(self, data):
+        if self.serialPort.is_open():
+            self.serialPort.write(data)
+        else:
+            print("Please connect COM")
+
+    def receive_data_serial(self):
+        if self.serialPort.is_open():
+            data_bytes = self.serialPort.read_all()
+            data_string = data_bytes.decode()
+            return data_string
+        else:
+            print("Please connect COM")
+            return ""
+

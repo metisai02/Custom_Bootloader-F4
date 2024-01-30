@@ -3,8 +3,9 @@ import os
 
 
 class Flash:
-    def __init__(self, ui):
+    def __init__(self, ui, uart):
         self.ui = ui
+        self.uart = uart
         self.ui.btnBrowser.clicked.connect(self.browser_file)
         self.hex_data = []
         self.base_addr = ""
@@ -34,25 +35,13 @@ class Flash:
     def hex_string_handler(self, data):
         if data[0] != ":":
             return 1
-        length = int((data[1] + data[2]), 16)
-        offset_addr = data[3] + data[4] + data[5] + data[6]
-        record_type = data[7] + data[8]
-        print(f"record_type: {record_type}")
-        print(f"length: {length}")
+        length = data[1] + data[2]
+        offset_addr = data[3:7]
+        record_type = data[7:9]
         if record_type == "00":  # data
             address = self.base_addr + offset_addr
-            an_integer = int(address, 16)
-            hex_value = hex(an_integer)
-            string_data = ""
-            i = 0
-            for char in data:
-                i += 1
-                if i > 8:
-                    string_data += char
-            data_an_integer = int(string_data, 16)
-            hex_string_data = hex(data_an_integer)
-            self.send_hex_to_board(address, length, hex_string_data)
-
+            substring_data = data[9:]  # cắt từ vị trí 9 đến hết chuỗi
+            self.send_hex_to_board(address, length, substring_data)
             # todo send data
         elif record_type == "01":  # End of File Record
             print("Done to write flash")
@@ -60,9 +49,12 @@ class Flash:
         elif record_type == "02":  # Extended Segment Address Record
             pass
         elif record_type == "04":  # Extended Linear Address Record
-            self.base_addr = data[9] + data[10] + data[11] + data[12]
+            self.base_addr = data[9:13]
 
-
-    def send_hex_to_board(self,address, length, data):
-        header = 0xFFFF
-        print(data)
+    def send_hex_to_board(self, address, length, data):
+        HEADER = "FFFF"
+        data_frame = HEADER + length + address + data
+        data_an_integer = int(data_frame, 16)
+        data_bytes = bytes.fromhex(data_frame)
+        print(data_bytes)
+        self.uart.serialPort.write(data_bytes)
