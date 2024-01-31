@@ -135,7 +135,10 @@
      <string>Select Buadrate</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="grFlash">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -147,7 +150,10 @@
     <property name="title">
      <string>FLASH</string>
     </property>
-    <widget class="QTextEdit" name="textEdit_2">
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <widget class="QTextEdit" name="tedSAddr">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -157,7 +163,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_3">
+    <widget class="QTextEdit" name="tedLength">
      <property name="geometry">
       <rect>
        <x>100</x>
@@ -265,6 +271,9 @@
     <property name="text">
      <string>hex file</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="btnProgram">
     <property name="geometry">
@@ -302,7 +311,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="grDevice">
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -314,7 +323,7 @@
     <property name="title">
      <string>Device</string>
     </property>
-    <widget class="QComboBox" name="comboBox_3">
+    <widget class="QComboBox" name="cbDevice">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -324,7 +333,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="plainTextEdit_2">
+    <widget class="QPlainTextEdit" name="ptedDevice">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -334,7 +343,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_5">
+    <widget class="QPushButton" name="btnAuto">
      <property name="geometry">
       <rect>
        <x>120</x>
